@@ -12,7 +12,11 @@ class App extends Component {
         firstName: undefined,
         lastName: undefined,
         address: undefined,
-        country: undefined
+        country: undefined,
+        email: undefined,
+        phone: undefined,
+        biography: undefined,
+        photo: undefined
       }
     }
 
@@ -39,12 +43,21 @@ class App extends Component {
     this.setState({
       personalInformation: editPersonal
     });
+    
+    if(e.target.files && e.target.files[0]) {
+      let img = e.target.files[0];
+      this.setState({
+        personalInformation: {
+          photo: URL.createObjectURL(img)
+        }
+      })
+    }
     console.log(this.state.personalInformation);
     return this.state.personalInformation;
   }
 
   render() {
-    const { firstName, lastName, address, country } = this.state.personalInformation;
+    const { firstName, lastName, address, country, email, phone, biography, photo } = this.state.personalInformation;
     return (
     <div className="container is-fullhd">
       <h1>CV Project</h1>
@@ -71,8 +84,12 @@ class App extends Component {
                   </div>
                   :
                   <div>
-                    <h2 class="title is-2">{firstName} {lastName}</h2>
-                    <h6 class="subtitle is-6 has-text-grey">{address}{country && `, ${country}`}</h6>
+                    <h2 className="title is-2">{firstName} {lastName}</h2>
+                    <h6 className="subtitle is-6 has-text-grey">{address}{country && `, ${country}`}</h6>
+                    <div>{email}</div>
+                    <div>{phone}</div>
+                    <div>{biography}</div>
+                    <div><img style={{width: '300px', height: 'auto'}} src={photo} alt="" /></div>
                   </div>
                 }
               </div>

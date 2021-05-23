@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from './Input';
+import Textarea from './Textarea';
 import Button from './Button';
 
 const personalInfoFields = {
@@ -22,11 +23,29 @@ const personalInfoFields = {
     name: 'country',
     type: 'text',
     placeholder: 'Country'
+  },
+  email: {
+    name: 'email',
+    type: 'email',
+    placeholder: 'Email'
+  },
+  phone: {
+    name: 'phone',
+    type: 'tel',
+    placeholder: 'Phone'
+  },
+  biography: {
+    name: 'biography',
+    placeholder: 'Enter a short bio'
+  },
+  photo: {
+    name: 'photo',
+    type: 'file'
   }
 }
 
 const PersonalInformationForm = (props) => {
-  const { firstName, lastName, address, country } = personalInfoFields;
+  const { firstName, lastName, address, country, email, phone, biography, photo } = personalInfoFields;
   return (
     <form className="box has-background-primary-light">
       <h4>Personal Information</h4>
@@ -50,10 +69,24 @@ const PersonalInformationForm = (props) => {
         name={country.name} 
         placeholder={country.placeholder} 
         handleChange={props.handleChange} />
-
-      {/* <Input type="text" text="Country" />
-      <Input type="email" text="Email" />
-      <Input type="tel" text="Phone" /> */}
+      <Input 
+        type={email.type} 
+        name={email.name} 
+        placeholder={email.placeholder} 
+        handleChange={props.handleChange} />
+      <Input 
+        type={phone.type} 
+        name={phone.name} 
+        placeholder={phone.placeholder} 
+        handleChange={props.handleChange} />
+      <Textarea 
+        name={biography.name} 
+        placeholder={biography.placeholder} 
+        handleChange={props.handleChange} />
+      <Input 
+        type={photo.type} 
+        name={photo.name} 
+        handleChange={props.handleChange} />
       <Button text="Save" /> 
     </form>
   );
