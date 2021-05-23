@@ -8,18 +8,30 @@ class App extends Component {
     super(props);
 
     this.state = {
-      personalInformation:{
-        firstName: '',
-        lastName: '',
-        address: '',
-        country: ''
+      personalInformation: {
+        firstName: undefined,
+        lastName: undefined,
+        address: undefined,
+        country: undefined
       }
     }
 
     this.handleChangePersonalInformation = this.handleChangePersonalInformation.bind(this);
+    this.isEmpty = this.isEmpty.bind(this);
   }
 
+  isEmpty(object) {
+    for (const key in object) {
+      if(object[key] === undefined || object[key].length === 0) {
+        return true
+      }
+      return false;
+    }
+  }
+  
+
   handleChangePersonalInformation(e) {
+    this.isEmpty(this.state.personalInformation);
     const personalInformation = this.state.personalInformation;
     const editPersonal =  personalInformation;
     const {name, value} = e.target;
@@ -52,8 +64,17 @@ class App extends Component {
           <div className="card">
             <div className="card-content">
               <div className="content">
-                <h2 class="title is-2">{firstName} {lastName}</h2>
-                <h6 class="subtitle is-6 has-text-grey">{address}{country && `, ${country}`}</h6>
+                {this.isEmpty(this.state.personalInformation) ? 
+                  <div>
+                    <div className="is-size-3 has-text-centered">Let's create your CV</div>
+                    <div className="is-size-2 has-text-centered">💪</div>
+                  </div>
+                  :
+                  <div>
+                    <h2 class="title is-2">{firstName} {lastName}</h2>
+                    <h6 class="subtitle is-6 has-text-grey">{address}{country && `, ${country}`}</h6>
+                  </div>
+                }
               </div>
             </div>
           </div> 
