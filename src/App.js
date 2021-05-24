@@ -9,6 +9,7 @@ class App extends Component {
 
     this.state = {
       personalInformation: {
+        isEditable: true,
         firstName: undefined,
         lastName: undefined,
         address: undefined,
@@ -22,6 +23,7 @@ class App extends Component {
 
     this.handleChangePersonalInformation = this.handleChangePersonalInformation.bind(this);
     this.isEmpty = this.isEmpty.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   isEmpty(object) {
@@ -38,26 +40,27 @@ class App extends Component {
     this.isEmpty(this.state.personalInformation);
     const personalInformation = this.state.personalInformation;
     const editPersonal =  personalInformation;
-    const {name, value} = e.target;
+    const name = e.target.name;
+    const value = (e.target.files && e.target.files[0]) ? URL.createObjectURL(e.target.files[0]) : e.target.value;
     editPersonal[name] = value;
     this.setState({
       personalInformation: editPersonal
     });
-    
-    if(e.target.files && e.target.files[0]) {
-      let img = e.target.files[0];
-      this.setState({
-        personalInformation: {
-          photo: URL.createObjectURL(img)
-        }
-      })
-    }
+
     console.log(this.state.personalInformation);
     return this.state.personalInformation;
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState({
+      personalInformation: {...this.state.personalInformation, isEditable: false}
+    });
+    console.log(this.state.personalInformation);
+  }
+
   render() {
-    const { firstName, lastName, address, country, email, phone, biography, photo } = this.state.personalInformation;
+    const { isEditable, firstName, lastName, address, country, email, phone, biography, photo } = this.state.personalInformation;
     return (
     <div className="container is-fullhd">
       <h1>CV Project</h1>
@@ -67,7 +70,10 @@ class App extends Component {
           <div className="card">
             <div className="card-content">
               <div className="content">
-                <PersonalInformationForm handleChange={this.handleChangePersonalInformation}/>
+                <PersonalInformationForm 
+                  isEditable={isEditable}
+                  handleChange={this.handleChangePersonalInformation}
+                  handleSubmit={this.handleSubmit} />
               </div>
             </div>
           </div>
@@ -84,12 +90,18 @@ class App extends Component {
                   </div>
                   :
                   <div>
-                    <h2 className="title is-2">{firstName} {lastName}</h2>
-                    <h6 className="subtitle is-6 has-text-grey">{address}{country && `, ${country}`}</h6>
-                    <div>{email}</div>
-                    <div>{phone}</div>
-                    <div>{biography}</div>
-                    <div><img style={{width: '300px', height: 'auto'}} src={photo} alt="" /></div>
+                    <div className="columns">
+                      <div className="column">
+                        <h2 className="title is-2">{firstName} {lastName}</h2>
+                        <h6 className="subtitle is-6 has-text-grey">{address}{country && `, ${country}`}</h6>
+                        <div>{email}</div>
+                        <div>{phone}</div>
+                        <div>{biography}</div>
+                      </div>
+                      <div className="column is-3 has-text-right">
+                        <img className="image" src={photo} alt="" />
+                      </div>
+                    </div>
                   </div>
                 }
               </div>

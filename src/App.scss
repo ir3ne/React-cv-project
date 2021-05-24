@@ -32,3 +32,17 @@ $input-shadow: none;
 body {
   background-color: #fafafa;
 }
+
+.image {
+  display: block;
+  position: relative;
+  width: 128px;
+  object-fit: cover;
+  height: 128px;
+  border-radius: 14%;
+  margin: auto;
+}
+
+.title.is-2 {
+  margin-top: 0;
+}

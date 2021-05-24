@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from './Input';
 import Textarea from './Textarea';
+import InputFile from './InputFile';
 import Button from './Button';
 
 const personalInfoFields = {
@@ -40,20 +41,21 @@ const personalInfoFields = {
   },
   photo: {
     name: 'photo',
-    type: 'file'
+    placeholder: 'Choose a file'
   }
 }
 
 const PersonalInformationForm = (props) => {
   const { firstName, lastName, address, country, email, phone, biography, photo } = personalInfoFields;
   return (
-    <form className="box has-background-primary-light">
+    <form onSubmit={props.handleSubmit} className="box has-background-primary-light">
       <h4>Personal Information</h4>
       <Input 
         type={firstName.type} 
         name={firstName.name} 
         placeholder={firstName.placeholder} 
-        handleChange={props.handleChange} />
+        handleChange={props.handleChange} 
+        isEditable={props.isEditable} />
       <Input 
         type={lastName.type} 
         name={lastName.name} 
@@ -83,11 +85,13 @@ const PersonalInformationForm = (props) => {
         name={biography.name} 
         placeholder={biography.placeholder} 
         handleChange={props.handleChange} />
-      <Input 
-        type={photo.type} 
+      <InputFile
         name={photo.name} 
+        placeholder={photo.placeholder} 
         handleChange={props.handleChange} />
-      <Button text="Save" /> 
+      <div className="has-text-right">
+        <Button type="submit" text={props.isEditable ? 'Save' : 'Edit'} /> 
+      </div>
     </form>
   );
 }
