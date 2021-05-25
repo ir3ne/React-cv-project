@@ -60,35 +60,44 @@ const PersonalInformationForm = (props) => {
         type={lastName.type} 
         name={lastName.name} 
         placeholder={lastName.placeholder} 
-        handleChange={props.handleChange} />
+        handleChange={props.handleChange}
+        isEditable={props.isEditable} />
       <Input 
         type={address.type} 
         name={address.name} 
         placeholder={address.placeholder} 
-        handleChange={props.handleChange} />
+        handleChange={props.handleChange}
+        isEditable={props.isEditable} />
       <Input 
         type={country.type} 
         name={country.name} 
         placeholder={country.placeholder} 
-        handleChange={props.handleChange} />
+        handleChange={props.handleChange}
+        isEditable={props.isEditable} />
       <Input 
         type={email.type} 
         name={email.name} 
         placeholder={email.placeholder} 
-        handleChange={props.handleChange} />
+        handleChange={props.handleChange}
+        isEditable={props.isEditable} />
       <Input 
         type={phone.type} 
         name={phone.name} 
         placeholder={phone.placeholder} 
-        handleChange={props.handleChange} />
+        handleChange={props.handleChange}
+        isEditable={props.isEditable} />
       <Textarea 
         name={biography.name} 
         placeholder={biography.placeholder} 
-        handleChange={props.handleChange} />
-      <InputFile
-        name={photo.name} 
-        placeholder={photo.placeholder} 
-        handleChange={props.handleChange} />
+        handleChange={props.handleChange}
+        isEditable={props.isEditable} />
+        <div className="mt-3">
+        <InputFile
+          name={photo.name} 
+          placeholder={photo.placeholder} 
+          handleChange={props.handleChange}
+          isEditable={props.isEditable} />
+        </div>
       <div className="has-text-right">
         <Button type="submit" text={props.isEditable ? 'Save' : 'Edit'} /> 
       </div>

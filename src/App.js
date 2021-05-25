@@ -54,7 +54,7 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState({
-      personalInformation: {...this.state.personalInformation, isEditable: false}
+      personalInformation: {...this.state.personalInformation, isEditable: !this.state.personalInformation.isEditable}
     });
     console.log(this.state.personalInformation);
   }
@@ -73,7 +73,7 @@ class App extends Component {
                 <PersonalInformationForm 
                   isEditable={isEditable}
                   handleChange={this.handleChangePersonalInformation}
-                  handleSubmit={this.handleSubmit} />
+                  handleSubmit={this.handleSubmit}  />
               </div>
             </div>
           </div>

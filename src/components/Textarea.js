@@ -7,6 +7,7 @@ const Textarea = (props) => {
       name={props.name}
       placeholder={props.placeholder}
       onChange={props.handleChange}
+      readOnly={!props.isEditable}
     ></textarea>
   );
 }
