@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import uniqid from 'uniqid';
 import './App.scss';
 import PersonalInformationForm from './components/PersonalInformationForm';
+import WorkExperienceForm from './components/WorkExperienceForm';
 import Button from './components/Button';
 
 class App extends Component {
@@ -18,12 +20,25 @@ class App extends Component {
         phone: undefined,
         biography: undefined,
         photo: undefined
-      }
+      },
+      workexperienceInformation: [
+        {
+          id: uniqid(),
+          isEditable: true,
+          role: undefined,
+          where: undefined,
+          startDate: undefined,
+          endDate: undefined,
+          description: undefined
+        }
+      ]
     }
 
     this.handleChangePersonalInformation = this.handleChangePersonalInformation.bind(this);
     this.isEmpty = this.isEmpty.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitPersonal = this.handleSubmitPersonal.bind(this);
+    this.handleSubmitWork = this.handleSubmitWork.bind(this);
+    this.addWorkExperience = this.addWorkExperience.bind(this);
   }
 
   isEmpty(object) {
@@ -51,7 +66,7 @@ class App extends Component {
     return this.state.personalInformation;
   }
 
-  handleSubmit(e) {
+  handleSubmitPersonal(e) {
     e.preventDefault();
     this.setState({
       personalInformation: {...this.state.personalInformation, isEditable: !this.state.personalInformation.isEditable}
@@ -59,8 +74,30 @@ class App extends Component {
     console.log(this.state.personalInformation);
   }
 
+  handleSubmitWork(e) {
+    e.preventDefault();
+    const editedWork = e.target.id;
+    this.state.workexperienceInformation.map(item => console.log('test', item.id));
+    this.setState({
+      workexperienceInformation: this.state.workexperienceInformation.map(item => {
+        if (editedWork === item.id) {
+          item.isEditable = !item.isEditable
+        }
+        return item;
+      })
+    });
+    console.log(this.state.workexperienceInformation);
+  }
+
+  addWorkExperience() {
+    this.setState({
+      workexperienceInformation: [...this.state.workexperienceInformation, <WorkExperienceForm />]
+    });
+  }
+
   render() {
     const { isEditable, firstName, lastName, address, country, email, phone, biography, photo } = this.state.personalInformation;
+
     return (
     <div className="container is-fullhd">
       <h1>CV Project</h1>
@@ -69,11 +106,21 @@ class App extends Component {
         <h3>Edit Section</h3>
           <div className="card">
             <div className="card-content">
-              <div className="content">
-                <PersonalInformationForm 
+              <div id="work-experience-container" className="content">
+                {/* <PersonalInformationForm 
                   isEditable={isEditable}
                   handleChange={this.handleChangePersonalInformation}
-                  handleSubmit={this.handleSubmit}  />
+                  handleSubmitPersonal={this.handleSubmitPersonal}  /> */}
+                <h4>Work Experience</h4>
+                {this.state.workexperienceInformation.map(w => {
+                  return <WorkExperienceForm 
+                    id={w.id} 
+                    isEditable={w.isEditable}
+                    handleSubmitWork={this.handleSubmitWork} />
+                })}
+                <div className="tt-mt-2">
+                  <Button type="button" handleWorkExperience={this.addWorkExperience} text='Add work experience' /> 
+                </div>
               </div>
             </div>
           </div>

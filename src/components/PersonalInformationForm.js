@@ -48,7 +48,7 @@ const personalInfoFields = {
 const PersonalInformationForm = (props) => {
   const { firstName, lastName, address, country, email, phone, biography, photo } = personalInfoFields;
   return (
-    <form onSubmit={props.handleSubmit} className="box has-background-primary-light">
+    <form onSubmit={props.handleSubmitPersonal} className="box has-background-primary-light">
       <h4>Personal Information</h4>
       <Input 
         type={firstName.type} 
