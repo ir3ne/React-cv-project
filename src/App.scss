@@ -50,3 +50,17 @@ body {
 h4 {
   margin-top: 0;
 }
+
+input,
+textarea {
+  &:read-only {
+    border-color: transparent;
+    color: $grey;
+  }
+}
+
+textarea {
+  &:read-only {
+    resize: none;
+  }
+}
