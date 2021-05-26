@@ -54,12 +54,12 @@ h4 {
 input,
 textarea {
   &:read-only {
-    border-color: transparent;
+    border-color: transparent !important;
     color: $grey;
-  }
 
-  &:hover {
-    border-color: transparent;
+    &:hover {
+      border-color: transparent !important;
+    }
   }
 }
 

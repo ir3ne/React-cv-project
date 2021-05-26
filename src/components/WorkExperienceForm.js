@@ -24,7 +24,7 @@ const workExperienceFields = {
       type: 'date'
     },
     description: {
-      name: 'role',
+      name: 'description',
       placeholder: 'Your job description'
     }
   },
@@ -34,11 +34,14 @@ const WorkExperienceItem = (props) => {
   const { experience } = workExperienceFields;
   return (
     <form id={props.id} onSubmit={props.handleSubmitWork} className="box">
+      <div>
+        <Button handleClick={props.handleDeleteWork} type="button" text="delete" />
+      </div>
       <Input 
         type={experience.role.type} 
         name={experience.role.name} 
         placeholder={experience.role.placeholder} 
-        handleChange={props.handleChange} 
+        handleChange={props.handleChange}
         isEditable={props.isEditable} />
       <Input 
         type={experience.where.type} 

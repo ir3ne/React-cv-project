@@ -11,6 +11,7 @@ const Input = (props) => {
           placeholder={props.placeholder}
           pattern={props.type === 'tel' ? '[0-9]{3}-[0-9]{3}-[0-9]{4}' : null} 
           onChange={props.handleChange}
+          // onChange={(e) => console.log(e.target.value)}
           readOnly={!props.isEditable}
         />
       </div>

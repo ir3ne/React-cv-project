@@ -35,10 +35,12 @@ class App extends Component {
     }
 
     this.handleChangePersonalInformation = this.handleChangePersonalInformation.bind(this);
+    this.handleChangeWorkInformation = this.handleChangeWorkInformation.bind(this);
     this.isEmpty = this.isEmpty.bind(this);
     this.handleSubmitPersonal = this.handleSubmitPersonal.bind(this);
     this.handleSubmitWork = this.handleSubmitWork.bind(this);
     this.addWorkExperience = this.addWorkExperience.bind(this);
+    this.handleDeleteWork = this.handleDeleteWork.bind(this);
   }
 
   isEmpty(object) {
@@ -62,8 +64,19 @@ class App extends Component {
       personalInformation: editPersonal
     });
 
-    console.log(this.state.personalInformation);
     return this.state.personalInformation;
+  }
+
+  handleChangeWorkInformation(e) {
+    const workId = e.target.form.id;
+    this.setState({
+      workexperienceInformation: this.state.workexperienceInformation.map(item => {
+        if (workId === item.id) {
+          item[e.target.name] = e.target.value;
+        };
+        return item;
+      })
+    });
   }
 
   handleSubmitPersonal(e) {
@@ -71,13 +84,12 @@ class App extends Component {
     this.setState({
       personalInformation: {...this.state.personalInformation, isEditable: !this.state.personalInformation.isEditable}
     });
-    console.log(this.state.personalInformation);
   }
 
   handleSubmitWork(e) {
     e.preventDefault();
     const editedWork = e.target.id;
-    this.state.workexperienceInformation.map(item => console.log('test', item.id));
+
     this.setState({
       workexperienceInformation: this.state.workexperienceInformation.map(item => {
         if (editedWork === item.id) {
@@ -86,12 +98,32 @@ class App extends Component {
         return item;
       })
     });
-    console.log(this.state.workexperienceInformation);
+    console.log('WORKS', this.state.workexperienceInformation);
+  }
+
+  handleDeleteWork(e) {
+    const workId = e.target.form.id;
+    let workList = this.state.workexperienceInformation.filter(item => item.id !== workId);
+    this.setState({
+      workexperienceInformation: this.state.workexperienceInformation.filter(item => item.id !== workId)
+    });
+    console.log('lista', workList);
+    console.log('listaState', this.state.workexperienceInformation);
   }
 
   addWorkExperience() {
     this.setState({
-      workexperienceInformation: [...this.state.workexperienceInformation, <WorkExperienceForm />]
+      workexperienceInformation: [...this.state.workexperienceInformation, 
+        {
+          id: uniqid(),
+          isEditable: true,
+          role: undefined,
+          where: undefined,
+          startDate: undefined,
+          endDate: undefined,
+          description: undefined
+        }
+      ]
     });
   }
 
@@ -114,12 +146,15 @@ class App extends Component {
                 <h4>Work Experience</h4>
                 {this.state.workexperienceInformation.map(w => {
                   return <WorkExperienceForm 
-                    id={w.id} 
+                    id={w.id}
                     isEditable={w.isEditable}
+                    handleChange={this.handleChangeWorkInformation}
+                    handleClick={this.handleSubmitWork}
+                    handleDeleteWork={this.handleDeleteWork}
                     handleSubmitWork={this.handleSubmitWork} />
                 })}
                 <div className="tt-mt-2">
-                  <Button type="button" handleWorkExperience={this.addWorkExperience} text='Add work experience' /> 
+                  <Button type="button" handleClick={this.addWorkExperience} text='Add work experience' /> 
                 </div>
               </div>
             </div>
