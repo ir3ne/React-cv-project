@@ -98,7 +98,6 @@ class App extends Component {
         return item;
       })
     });
-    console.log('WORKS', this.state.workexperienceInformation);
   }
 
   handleDeleteWork(e) {
@@ -108,7 +107,6 @@ class App extends Component {
     this.setState({
       workexperienceInformation: workList
     });
-    console.log('listaState', this.state.workexperienceInformation);
   }
 
   addWorkExperience() {
@@ -129,7 +127,7 @@ class App extends Component {
 
   render() {
     const { isEditable, firstName, lastName, address, country, email, phone, biography, photo } = this.state.personalInformation;
-
+    console.log('listaState in render', this.state.workexperienceInformation);
     return (
     <div className="container is-fullhd">
       <h1>CV Project</h1>
@@ -150,15 +148,6 @@ class App extends Component {
                   handleClick={this.handleSubmitWork}
                   handleDeleteWork={this.handleDeleteWork} 
                   handleSubmitWork={this.handleSubmitWork} />
-                {/* // {this.state.workexperienceInformation.map(w => { */}
-                {/* //   return <WorkExperienceForm  */}
-                {/* //     id={w.id}
-                //     isEditable={w.isEditable}
-                //     handleChange={this.handleChangeWorkInformation}
-                //     handleClick={this.handleSubmitWork}
-                //     handleDeleteWork={this.handleDeleteWork}
-                //     handleSubmitWork={this.handleSubmitWork} />
-                // })} */}
                 <div className="tt-mt-2">
                   <Button type="button" handleClick={this.addWorkExperience} text='Add work experience' /> 
                 </div>
