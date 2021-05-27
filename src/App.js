@@ -178,6 +178,17 @@ class App extends Component {
                       <div className="column is-3 has-text-right">
                         <img className="image" src={photo} alt="" />
                       </div>
+                      <div>
+                        <div>Work Experience</div>
+                        {this.state.workexperienceInformation.map(w => {
+                          return (
+                            <div key={w.id}>
+                              <div>{w.role}</div>    
+                            </div>
+                          )
+                        })}
+                        <div></div>
+                      </div>
                     </div>
                   </div>
                 }
