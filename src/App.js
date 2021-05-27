@@ -104,10 +104,10 @@ class App extends Component {
   handleDeleteWork(e) {
     const workId = e.target.form.id;
     let workList = this.state.workexperienceInformation.filter(item => item.id !== workId);
+
     this.setState({
-      workexperienceInformation: this.state.workexperienceInformation.filter(item => item.id !== workId)
+      workexperienceInformation: workList
     });
-    console.log('lista', workList);
     console.log('listaState', this.state.workexperienceInformation);
   }
 
@@ -144,15 +144,21 @@ class App extends Component {
                   handleChange={this.handleChangePersonalInformation}
                   handleSubmitPersonal={this.handleSubmitPersonal}  /> */}
                 <h4>Work Experience</h4>
-                {this.state.workexperienceInformation.map(w => {
-                  return <WorkExperienceForm 
-                    id={w.id}
-                    isEditable={w.isEditable}
-                    handleChange={this.handleChangeWorkInformation}
-                    handleClick={this.handleSubmitWork}
-                    handleDeleteWork={this.handleDeleteWork}
-                    handleSubmitWork={this.handleSubmitWork} />
-                })}
+                <WorkExperienceForm 
+                  workList={this.state.workexperienceInformation}
+                  handleChange={this.handleChangeWorkInformation}
+                  handleClick={this.handleSubmitWork}
+                  handleDeleteWork={this.handleDeleteWork} 
+                  handleSubmitWork={this.handleSubmitWork} />
+                {/* // {this.state.workexperienceInformation.map(w => { */}
+                {/* //   return <WorkExperienceForm  */}
+                {/* //     id={w.id}
+                //     isEditable={w.isEditable}
+                //     handleChange={this.handleChangeWorkInformation}
+                //     handleClick={this.handleSubmitWork}
+                //     handleDeleteWork={this.handleDeleteWork}
+                //     handleSubmitWork={this.handleSubmitWork} />
+                // })} */}
                 <div className="tt-mt-2">
                   <Button type="button" handleClick={this.addWorkExperience} text='Add work experience' /> 
                 </div>
