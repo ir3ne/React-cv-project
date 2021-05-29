@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Input from './Input';
-import Textarea from './Textarea';
-import Button from './Button';
+import Input from '../Input';
+import Textarea from '../Textarea';
+import Button from '../Button';
 
 const workExperienceFields = {
   experience: {
@@ -89,8 +89,5 @@ class WorkExperienceItem extends Component {
   );
   }
 }
-// const WorkExperienceItem = (props) => {
-  
-// }
 
 export default WorkExperienceItem;

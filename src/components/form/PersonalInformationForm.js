@@ -1,8 +1,8 @@
 import React from 'react';
-import Input from './Input';
-import Textarea from './Textarea';
-import InputFile from './InputFile';
-import Button from './Button';
+import Input from '../Input';
+import Textarea from '../Textarea';
+import InputFile from '../InputFile';
+import Button from '../Button';
 
 const personalInfoFields = {
   firstName: {
@@ -48,7 +48,7 @@ const personalInfoFields = {
 const PersonalInformationForm = (props) => {
   const { firstName, lastName, address, country, email, phone, biography, photo } = personalInfoFields;
   return (
-    <form onSubmit={props.handleSubmitPersonal} className="box has-background-primary-light">
+    <form onSubmit={props.handleSubmitPersonal} className="box">
       <h4>Personal Information</h4>
       <Input 
         type={firstName.type} 

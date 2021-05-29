@@ -5,7 +5,7 @@ const Input = (props) => {
     <div className="field">
       <div className="control">
         <input 
-          className="input" 
+          className="input is-small" 
           name={props.name}
           type={props.type} 
           placeholder={props.placeholder}
