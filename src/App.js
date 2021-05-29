@@ -62,22 +62,18 @@ class App extends Component {
   }
 
   isNotEdited(object) {
-    // for (const key in object) {
-    //   if (typeof(object[key]) !== 'boolean') {
-    //     console.log('TEST');
-    //     if (object[key] === undefined) {
-    //       return true;
-    //     } else {
-    //       return false;
-    //     }
-    //   }    
-    // }
+    let arr = [];
+    for (const key in object) {
+      if(typeof(object[key]) !== 'boolean') {
+        arr.push(object[key]);
+      }    
+    }
+    return arr.every(i => i === undefined || i.trim().length === 0);
   }
 
 
   handleChangePersonalInformation(e) {
-    console.log(e.target.value);
-    
+    this.isNotEdited(this.state.personalInformation);
     const personalInformation = this.state.personalInformation;
     const editPersonal =  personalInformation;
     const name = e.target.name;
@@ -91,6 +87,7 @@ class App extends Component {
   }
 
   handleChangeWorkInformation(e) {
+    this.isNotEdited(this.state.workexperienceInformation);
     const workId = e.target.form.id;
     this.setState({
       workexperienceInformation: this.state.workexperienceInformation.map(item => {
@@ -103,6 +100,7 @@ class App extends Component {
   }
 
   handleChangeEducationInformation(e) {
+    this.isNotEdited(this.state.educationInformation);
     const edId = e.target.form.id;
     this.setState({
       educationInformation: this.state.educationInformation.map(item => {
@@ -199,7 +197,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log('TEST', this.isNotEdited(this.state.personalInformation));
     const { isEditable } = this.state.personalInformation;
     return (
     <div className="container is-fullhd">
