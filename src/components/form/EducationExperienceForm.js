@@ -5,7 +5,7 @@ import Button from '../Button';
 const educationExperienceFields = {
   education: {
     course: {
-      name: 'role',
+      name: 'course',
       type: 'text',
       placeholder: 'Your course'
     },
@@ -25,10 +25,6 @@ const educationExperienceFields = {
   },
 }
 class EducationExperienceForm extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
   const { education } = educationExperienceFields;
   return (
@@ -36,8 +32,8 @@ class EducationExperienceForm extends Component {
       {this.props.educationList.map(ed => {
         return (
           <form id={ed.id} key={ed.id} onSubmit={this.props.handleSubmitEducation} className="box">
-          <div>
-            <Button handleClick={this.props.handleDeleteEducation} type="button" text="delete" />
+          <div className="has-text-right">
+            <Button className="button is-danger is-light is-small mb-2" handleClick={this.props.handleDeleteEducation} type="button" text="Delete" />
           </div>
           <Input 
             type={education.course.type} 
@@ -69,8 +65,8 @@ class EducationExperienceForm extends Component {
                 isEditable={ed.isEditable} />
               </div>
             </div>
-          <div className="has-text-right">
-            <Button type="submit" text={ed.isEditable ? 'Save' : 'Edit'} /> 
+          <div className="has-text-right mt-4">
+            <Button type="submit" className="button is-primary" text={ed.isEditable ? 'Save' : 'Edit'} /> 
           </div>
         </form>
         );

@@ -30,10 +30,6 @@ const workExperienceFields = {
   },
 }
 class WorkExperienceItem extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
   const { experience } = workExperienceFields;
   return (
@@ -41,8 +37,8 @@ class WorkExperienceItem extends Component {
       {this.props.workList.map(work => {
         return (
           <form id={work.id} key={work.id} onSubmit={this.props.handleSubmitWork} className="box">
-          <div>
-            <Button handleClick={this.props.handleDeleteWork} type="button" text="delete" />
+          <div className="has-text-right">
+            <Button className="button is-danger is-light is-small mb-2" handleClick={this.props.handleDeleteWork} type="button" text="Delete" />
           </div>
           <Input 
             type={experience.role.type} 
@@ -79,8 +75,8 @@ class WorkExperienceItem extends Component {
             placeholder={experience.description.placeholder} 
             handleChange={this.props.handleChange}
             isEditable={work.isEditable} />
-          <div className="has-text-right">
-            <Button type="submit" text={work.isEditable ? 'Save' : 'Edit'} /> 
+          <div className="has-text-right mt-4">
+            <Button type="submit" className="button is-primary" text={work.isEditable ? 'Save' : 'Edit'} /> 
           </div>
         </form>
         );

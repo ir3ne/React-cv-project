@@ -49,7 +49,7 @@ class App extends Component {
     this.handleChangePersonalInformation = this.handleChangePersonalInformation.bind(this);
     this.handleChangeWorkInformation = this.handleChangeWorkInformation.bind(this);
     this.handleChangeEducationInformation = this.handleChangeEducationInformation.bind(this);
-    this.isEmptyExceptBoolean = this.isEmptyExceptBoolean.bind(this);
+    this.isNotEdited = this.isNotEdited.bind(this);
     this.handleSubmitPersonal = this.handleSubmitPersonal.bind(this);
     this.handleSubmitWork = this.handleSubmitWork.bind(this);
     this.handleSubmitEducation = this.handleSubmitEducation.bind(this);
@@ -59,20 +59,23 @@ class App extends Component {
     this.handleDeleteEducation = this.handleDeleteEducation.bind(this);
   }
 
-  isEmptyExceptBoolean(object) {
-    for (const key in object) {
-      if(typeof(object[key]) !== 'boolean') {
-        console.log('j', object[key]);
-        // if(object[key] === undefined || object[key].length === 0) {
-        //   return true
-        // }
-        // return false;
-      }
-    }
+  isNotEdited(object) {
+    // for (const key in object) {
+    //   if (typeof(object[key]) !== 'boolean') {
+    //     console.log('TEST');
+    //     if (object[key] === undefined) {
+    //       return true;
+    //     } else {
+    //       return false;
+    //     }
+    //   }    
+    // }
   }
 
+
   handleChangePersonalInformation(e) {
-    this.isEmptyExceptBoolean(this.state.personalInformation);
+    console.log(e.target.value);
+    
     const personalInformation = this.state.personalInformation;
     const editPersonal =  personalInformation;
     const name = e.target.name;
@@ -81,7 +84,7 @@ class App extends Component {
     this.setState({
       personalInformation: editPersonal
     });
-
+    this.isNotEdited(e.target.value);
     return this.state.personalInformation;
   }
 
@@ -194,7 +197,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.isEmptyExceptBoolean(this.state.personalInformation));
+    console.log(this.state);
     const { isEditable } = this.state.personalInformation;
     return (
     <div className="container is-fullhd">
@@ -209,17 +212,17 @@ class App extends Component {
                   isEditable={isEditable}
                   handleChange={this.handleChangePersonalInformation}
                   handleSubmitPersonal={this.handleSubmitPersonal}  />
-                <h4>Work Experience</h4>
+                <h4 className="pl-4">Work Experience</h4>
                 <WorkExperienceForm 
                   workList={this.state.workexperienceInformation}
                   handleChange={this.handleChangeWorkInformation}
                   handleClick={this.handleSubmitWork}
                   handleDeleteWork={this.handleDeleteWork} 
                   handleSubmitWork={this.handleSubmitWork} />
-                <div className="tt-mt-2">
-                  <Button type="button" handleClick={this.addWorkExperience} text='Add work experience' /> 
+                <div className="has-text-centered mt-4">
+                  <Button type="button" className="button is-primary" handleClick={this.addWorkExperience} text='Add work experience' /> 
                 </div>
-                <h4>Education</h4>
+                <h4 className="pl-4 mt-4">Education</h4>
                 <EducationExperienceForm
                   educationList={this.state.educationInformation}
                   handleChange={this.handleChangeEducationInformation}
@@ -227,8 +230,8 @@ class App extends Component {
                   handleDeleteEducation={this.handleDeleteEducation} 
                   handleSubmitEducation={this.handleSubmitEducation} 
                   />
-                <div className="tt-mt-2">
-                  <Button type="button" handleClick={this.addEducation} text='Add education' /> 
+                <div className="has-text-centered mt-4">
+                  <Button type="button" className="button is-primary" handleClick={this.addEducation} text='Add education' /> 
                 </div>
               </div>
             </div>
@@ -239,7 +242,7 @@ class App extends Component {
           <div className="card">
             <div className="card-content">
               <div className="content">
-                {this.isEmptyExceptBoolean(this.state.personalInformation) || this.isEmptyExceptBoolean(this.state.workexperienceInformation) ? 
+                {this.isNotEdited(this.state.personalInformation) ? 
                   <div>
                     <div className="is-size-3 has-text-centered">Let's create your CV</div>
                     <div className="is-size-2 has-text-centered">💪</div>

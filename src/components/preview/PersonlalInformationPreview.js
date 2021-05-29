@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PersonalInformationPreview = (props) => {
-  const { isEditable, firstName, lastName, address, country, email, phone, biography, photo } = props.personalCompiled;
+  const { firstName, lastName, address, country, email, phone, biography, photo } = props.personalCompiled;
   return (
     <div className="columns">
       <div className="column">

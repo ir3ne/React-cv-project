@@ -99,7 +99,7 @@ const PersonalInformationForm = (props) => {
           isEditable={props.isEditable} />
         </div>
       <div className="has-text-right">
-        <Button type="submit" text={props.isEditable ? 'Save' : 'Edit'} /> 
+        <Button type="submit" className="button is-primary" text={props.isEditable ? 'Save' : 'Edit'} /> 
       </div>
     </form>
   );

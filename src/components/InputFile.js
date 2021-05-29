@@ -2,7 +2,7 @@ import React from 'react';
 
 const InputFile = (props) => {
   return (
-    <div className="file is-boxed">
+    <div className="file">
       <label className="file-label">
         <input 
           className="file-input" 
