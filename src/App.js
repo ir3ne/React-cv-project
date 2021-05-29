@@ -5,6 +5,8 @@ import PersonalInformationForm from './components/form/PersonalInformationForm';
 import WorkExperienceForm from './components/form/WorkExperienceForm';
 import EducationExperienceForm from './components/form/EducationExperienceForm';
 import PersonalInformationPreview from './components/preview/PersonlalInformationPreview';
+import WorkInformationPreview from './components/preview/WorkInformationPreview';
+import EducationInformationPreview from './components/preview/EducationInformationPreview';
 import Button from './components/Button';
 
 class App extends Component {
@@ -238,7 +240,7 @@ class App extends Component {
           </div>
         </div>
         <div className="column">
-        <h3>Preview Section</h3>
+        <h3>Preview</h3>
           <div className="card">
             <div className="card-content">
               <div className="content">
@@ -250,19 +252,8 @@ class App extends Component {
                   :
                   <div>
                     <PersonalInformationPreview personalCompiled={this.state.personalInformation} />
-                    <div className="columns">
-                      <div>
-                        <div>Work Experience</div>
-                        {this.state.workexperienceInformation.map(w => {
-                          return (
-                            <div key={w.id}>
-                              <div>{w.role}</div>    
-                            </div>
-                          )
-                        })}
-                        <div></div>
-                      </div>
-                    </div>
+                    <WorkInformationPreview workCompiled={this.state.workexperienceInformation} />
+                    <EducationInformationPreview educationCompiled={this.state.educationInformation} />
                   </div>
                 }
               </div>
