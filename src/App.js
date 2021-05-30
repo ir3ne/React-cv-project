@@ -8,6 +8,7 @@ import PersonalInformationPreview from './components/preview/PersonlalInformatio
 import WorkInformationPreview from './components/preview/WorkInformationPreview';
 import EducationInformationPreview from './components/preview/EducationInformationPreview';
 import Button from './components/Button';
+import NotEdited from './components/preview/NotEdited';
 
 class App extends Component {
   constructor(props) {
@@ -243,10 +244,7 @@ class App extends Component {
             <div className="card-content">
               <div className="content">
                 {this.isNotEdited(this.state.personalInformation) ? 
-                  <div>
-                    <div className="is-size-3 has-text-centered">Let's create your CV</div>
-                    <div className="is-size-2 has-text-centered">💪</div>
-                  </div>
+                  <NotEdited />
                   :
                   <div>
                     <PersonalInformationPreview personalCompiled={this.state.personalInformation} />
