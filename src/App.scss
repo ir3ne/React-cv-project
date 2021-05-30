@@ -1,17 +1,5 @@
 @charset "utf-8";
 
-// $purple: #8a4d76;
-// $pink: #fa7c91;
-// $brown: #757763;
-// $beige-light: #d0d1cd;
-// $beige-lighter: #eff0eb;
-
-// $grey-dark: $brown;
-// $grey-light: $beige-light;
-// $link: $pink;
-// $widescreen-enabled: false;
-// $fullhd-enabled: false;
-
 $control-border-width: 2px;
 $input-shadow: none;
 
@@ -31,6 +19,18 @@ $input-shadow: none;
 
 body {
   background-color: #fafafa;
+  font-family: 'Open Sans', sans-serif;
+}
+
+input,
+textarea {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+
+  &::placeholder {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+  }
 }
 
 .image {
