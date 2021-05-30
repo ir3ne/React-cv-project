@@ -12,7 +12,10 @@ const PersonalInformationPreview = (props) => {
         <div>{biography}</div>
       </div>
       <div className="column is-3 has-text-right">
-        <img className="image" src={photo} alt="" />
+        {photo ? 
+          <img className="image" src={photo} alt="" /> 
+          : null
+        }
       </div>
     </div>
   );

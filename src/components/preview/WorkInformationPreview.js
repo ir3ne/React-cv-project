@@ -3,7 +3,7 @@ import React from 'react';
 const WorkInformationPreview = (props) => {
   return (
     <div>
-      <h4>Work Experience</h4>
+      {/* <h4>Work Experience</h4> */}
       {props.workCompiled.map(w => {
         return (
           <div key={w.id}>
