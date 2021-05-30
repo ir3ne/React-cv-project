@@ -63,13 +63,28 @@ class App extends Component {
   }
 
   isNotEdited(object) {
-    let arr = [];
-    for (const key in object) {
-      if(typeof(object[key]) !== 'boolean') {
-        arr.push(object[key]);
-      }    
+    if(Array.isArray(object)) {
+      object.map(i => {
+        let arr = [];
+        for (const key in i) {
+          console.log('!!', typeof(i[key]));
+          console.log('key', key);
+          if(key !== 'id' || typeof i[key] !== 'boolean') {
+            arr.push(i[key]);
+            console.log('arr merda', arr);
+          }    
+        }
+        // return arr.every(i => i === undefined || i.trim().length === 0);
+      });
+    } else {
+      let arr = [];
+      for (const key in object) {
+        if(typeof(object[key]) !== 'boolean') {
+          arr.push(object[key]);
+        }    
+      }
+      return arr.every(i => i === undefined || i.trim().length === 0);
     }
-    return arr.every(i => i === undefined || i.trim().length === 0);
   }
 
 
@@ -198,7 +213,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('TEST', this.isNotEdited(this.state.personalInformation));
+    console.log('TEST', this.isNotEdited(this.state.workexperienceInformation));
     const { isEditable } = this.state.personalInformation;
     return (
     <div className="container is-fullhd">
@@ -243,7 +258,7 @@ class App extends Component {
           <div className="card">
             <div className="card-content">
               <div className="content">
-                {this.isNotEdited(this.state.personalInformation) ? 
+                {this.isNotEdited(this.state.personalInformation) || this.isNotEdited(this.state.workexperienceInformation) ? 
                   <NotEdited />
                   :
                   <div>
