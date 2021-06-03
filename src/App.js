@@ -62,30 +62,23 @@ class App extends Component {
     this.handleDeleteEducation = this.handleDeleteEducation.bind(this);
   }
 
-  isNotEdited(object) {
-    if(Array.isArray(object)) {
-      object.map(i => {
-        let arr = [];
-        for (const key in i) {
-          console.log('!!', typeof(i[key]));
-          console.log('key', key);
-          if(key !== 'id' || typeof i[key] !== 'boolean') {
-            arr.push(i[key]);
-            console.log('arr merda', arr);
-          }    
-        }
-        // return arr.every(i => i === undefined || i.trim().length === 0);
-      });
-    } else {
+  isNotEdited(item) {
+    if (item.constructor === Object) {
       let arr = [];
-      for (const key in object) {
-        if(typeof(object[key]) !== 'boolean') {
-          arr.push(object[key]);
-        }    
+      for (const key in item) {
+        if (typeof item[key] !== "boolean" && key !== "id") {
+          arr.push(item[key]);
+        }
       }
-      return arr.every(i => i === undefined || i.trim().length === 0);
-    }
-  }
+      return arr.every((i) => i === undefined);
+    } else if (item.constructor === Array) {
+      let isNonCompiled = true;
+      item.map((i) => {
+        isNonCompiled = this.isNotEdited(i);
+      });
+      return isNonCompiled;
+    } else return;
+  };
 
 
   handleChangePersonalInformation(e) {
@@ -213,7 +206,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('TEST', this.isNotEdited(this.state.workexperienceInformation));
+    console.log('TEST', this.isNotEdited(this.state.personalInformation));
     const { isEditable } = this.state.personalInformation;
     return (
     <div className="container is-fullhd">
@@ -258,7 +251,7 @@ class App extends Component {
           <div className="card">
             <div className="card-content">
               <div className="content">
-                {this.isNotEdited(this.state.personalInformation) || this.isNotEdited(this.state.workexperienceInformation) ? 
+                {this.isNotEdited(this.state.workexperienceInformation) ? 
                   <NotEdited />
                   :
                   <div>
