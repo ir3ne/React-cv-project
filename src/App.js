@@ -67,6 +67,9 @@ class App extends Component {
       let arr = [];
       for (const key in item) {
         if (typeof item[key] !== "boolean" && key !== "id") {
+          if(item[key] !== undefined) {
+            if(item[key].trim().length === 0) item[key] = undefined;
+          }
           arr.push(item[key]);
         }
       }
@@ -206,7 +209,10 @@ class App extends Component {
   }
 
   render() {
-    console.log('TEST', this.isNotEdited(this.state.personalInformation));
+    let personalIsNotEdited = this.isNotEdited(this.state.personalInformation);
+    let workIsNotEdited = this.isNotEdited(this.state.workexperienceInformation);
+    let educationIsNotEdited = this.isNotEdited(this.state.educationInformation);
+    
     const { isEditable } = this.state.personalInformation;
     return (
     <div className="container is-fullhd">
@@ -251,7 +257,7 @@ class App extends Component {
           <div className="card">
             <div className="card-content">
               <div className="content">
-                {this.isNotEdited(this.state.workexperienceInformation) ? 
+                {personalIsNotEdited && workIsNotEdited && educationIsNotEdited ? 
                   <NotEdited />
                   :
                   <div>
