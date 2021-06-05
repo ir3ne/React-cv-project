@@ -261,9 +261,9 @@ class App extends Component {
                   <NotEdited />
                   :
                   <div>
-                    <PersonalInformationPreview personalCompiled={this.state.personalInformation} />
-                    <WorkInformationPreview workCompiled={this.state.workexperienceInformation} />
-                    <EducationInformationPreview educationCompiled={this.state.educationInformation} />
+                    {!personalIsNotEdited ? <PersonalInformationPreview personalCompiled={this.state.personalInformation} /> : null}
+                    {!workIsNotEdited ? <WorkInformationPreview workCompiled={this.state.workexperienceInformation} /> : null}
+                    {!educationIsNotEdited ? <EducationInformationPreview educationCompiled={this.state.educationInformation} /> : null}
                   </div>
                 }
               </div>
