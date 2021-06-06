@@ -13,7 +13,7 @@ import NotEdited from './components/preview/NotEdited';
 class App extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       personalInformation: {
         isEditable: true,

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Input from '../Input';
 import Textarea from '../Textarea';
 import Button from '../Button';
@@ -29,28 +29,27 @@ const workExperienceFields = {
     }
   },
 }
-class WorkExperienceItem extends Component {
-  render() {
+const WorkExperienceItem = (props) => {
   const { experience } = workExperienceFields;
   return (
     <div>
-      {this.props.workList.map(work => {
+      {props.workList.map(work => {
         return (
-          <form id={work.id} key={work.id} onSubmit={this.props.handleSubmitWork} className="box">
+          <form id={work.id} key={work.id} onSubmit={props.handleSubmitWork} className="box">
           <div className="has-text-right">
-            <Button className="button is-danger is-light is-small mb-2" handleClick={this.props.handleDeleteWork} type="button" text="Delete" />
+            <Button className="button is-danger is-light is-small mb-2" handleClick={props.handleDeleteWork} type="button" text="Delete" />
           </div>
           <Input 
             type={experience.role.type} 
             name={experience.role.name} 
             placeholder={experience.role.placeholder} 
-            handleChange={this.props.handleChange}
+            handleChange={props.handleChange}
             isEditable={work.isEditable} />
           <Input 
             type={experience.where.type} 
             name={experience.where.name} 
             placeholder={experience.where.placeholder} 
-            handleChange={this.props.handleChange} 
+            handleChange={props.handleChange} 
             isEditable={work.isEditable} />
             <div className="columns">
               <div className="column">
@@ -58,7 +57,7 @@ class WorkExperienceItem extends Component {
                 type={experience.startDate.type} 
                 name={experience.startDate.name} 
                 placeholder={experience.startDate.placeholder} 
-                handleChange={this.props.handleChange} 
+                handleChange={props.handleChange} 
                 isEditable={work.isEditable} />
               </div>
               <div className="column">
@@ -66,14 +65,14 @@ class WorkExperienceItem extends Component {
                 type={experience.endDate.type} 
                 name={experience.endDate.name} 
                 placeholder={experience.endDate.placeholder} 
-                handleChange={this.props.handleChange} 
+                handleChange={props.handleChange} 
                 isEditable={work.isEditable} />
               </div>
             </div>
           <Textarea 
             name={experience.description.name} 
             placeholder={experience.description.placeholder} 
-            handleChange={this.props.handleChange}
+            handleChange={props.handleChange}
             isEditable={work.isEditable} />
           <div className="has-text-right mt-4">
             <Button type="submit" className="button is-primary" text={work.isEditable ? 'Save' : 'Edit'} /> 
@@ -83,7 +82,6 @@ class WorkExperienceItem extends Component {
       })}
   </div>   
   );
-  }
 }
 
 export default WorkExperienceItem;
